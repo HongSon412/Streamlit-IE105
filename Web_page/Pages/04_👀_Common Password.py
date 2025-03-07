@@ -1,7 +1,7 @@
 import streamlit as st
 from sklearn.feature_extraction.text import TfidfVectorizer
 from PIL import Image
-
+import pandas as pd
 st.set_page_config(
     page_title="Home",
     page_icon="🏠",
@@ -18,21 +18,24 @@ st.image(common_password, width=1000)
 st.write("# How Common is your Password? 🔒")
 
 # Tạo dữ liệu giả lập
-data = r"C:\Users\asus\OneDrive - Trường ĐH CNTT - University of Information Technology\VISUAL STUDIO CODE\PYTHON\IE105\Streamlit IE105\Datasets\top_10000_common_passwords.csv"
+file_path = r"C:\Users\asus\OneDrive - Trường ĐH CNTT - University of Information Technology\VISUAL STUDIO CODE\PYTHON\IE105\Streamlit IE105\Datasets\top_10000_common_passwords.csv"
+df = pd.read_csv(file_path, header=0, names=["password", "rank"])  # Đọc với tiêu đề đúng
 
-st.write("Write a password to check how common it is. Let see if your password is among the top 10,000 common passwords.")
+# Chuyển đổi cột mật khẩu thành danh sách
+password_list = df["password"].astype(str).str.strip().tolist()
 
-def def_common(password):
-    # Đọc dữ liệu từ tệp
-    with open(data, "r") as file:
-        common_passwords = file.readlines()
-    # Kiểm tra mật khẩu
-    if password in common_passwords:
-        st.write(f"""The password `{password}` is ranked {common_passwords.index(password)+1} in the list of top 10,000 common passwords.""")
-        st.write("You should change your password.")
+# Hiển thị thông tin
+st.write("Write a password to check how common it is. Let's see if your password is among the top 10,000 common passwords.")
+
+def check_common(password):
+    """Kiểm tra xem mật khẩu có trong danh sách 10,000 mật khẩu phổ biến không"""
+    password = password.strip()  # Loại bỏ khoảng trắng
+    if password in password_list:
+        rank = df.loc[df["password"] == password, "rank"].values[0]  # Lấy thứ hạng
+        st.write(f"""🔴 The password `{password}` is ranked **#{rank}** in the list of top 10,000 common passwords.""")
     else:
-        st.write(f"Your password `{password}` is not common.")
-        st.write("You are safe!")
+        st.write(f"✅ Your password `{password}` is **not common**.")
+
 
 text = st.text_input("Enter a password:")
 
@@ -40,7 +43,7 @@ text = st.text_input("Enter a password:")
 if st.button("Check how common is your password"):
     # Hàm dự đoán mật khẩu
     if text:  # Kiểm tra nếu người dùng đã nhập dữ liệu
-        def_common(text)
+        check_common(text)
     else:
         st.write("Please input a value.")
 
@@ -61,6 +64,6 @@ st.markdown(
 
 # Tạo nút tải xuống
 st.download_button(label="Click here to download ✨", 
-                   data=data, 
+                   data=file_path, 
                    file_name="common_passwords.txt", 
                    mime="text/plain")

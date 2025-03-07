@@ -75,6 +75,12 @@ def predict(password):
     
     # Hiển thị kết quả và giải thích
     st.write(f"Password strength prediction: {predicted_strength}")
+    if predicted_strength == "weak":
+        st.warning("You should change your password! 🔒")
+    elif predicted_strength == "normal":
+        st.info("Your password is normal. 🎉")
+    else:
+        st.success("You are safe! 🎉")
     st.write("Explanation of the prediction:")
     #st_shap(explanation)
     
