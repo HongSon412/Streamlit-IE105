@@ -1,22 +1,49 @@
 import streamlit as st
 from sklearn.feature_extraction.text import TfidfVectorizer
 from PIL import Image
+
 st.set_page_config(
     page_title="Home",
     page_icon="🏠",
     layout="wide",
 )
+
 # Ignore warnings
 import warnings 
 from warnings import filterwarnings
 filterwarnings("ignore")
 
 common_password = Image.open(r"C:\Users\asus\OneDrive - Trường ĐH CNTT - University of Information Technology\VISUAL STUDIO CODE\PYTHON\IE105\Streamlit IE105\Web_page\Images\common_password.jpg")
-st.image(common_password, width=100)
+st.image(common_password, width=1000)
 st.write("# How Common is your Password? 🔒")
 
 # Tạo dữ liệu giả lập
-data = "C:\Users\asus\OneDrive - Trường ĐH CNTT - University of Information Technology\VISUAL STUDIO CODE\PYTHON\IE105\Streamlit IE105\Datasets\top_10000_common_passwords.csv"
+data = r"C:\Users\asus\OneDrive - Trường ĐH CNTT - University of Information Technology\VISUAL STUDIO CODE\PYTHON\IE105\Streamlit IE105\Datasets\top_10000_common_passwords.csv"
+
+st.write("Write a password to check how common it is. Let see if your password is among the top 10,000 common passwords.")
+
+def def_common(password):
+    # Đọc dữ liệu từ tệp
+    with open(data, "r") as file:
+        common_passwords = file.readlines()
+    # Kiểm tra mật khẩu
+    if password in common_passwords:
+        st.write(f"""The password `{password}` is ranked {common_passwords.index(password)+1} in the list of top 10,000 common passwords.""")
+        st.write("You should change your password.")
+    else:
+        st.write(f"Your password `{password}` is not common.")
+        st.write("You are safe!")
+
+text = st.text_input("Enter a password:")
+
+# Thêm nút để thực hiện dự đoán
+if st.button("Check how common is your password"):
+    # Hàm dự đoán mật khẩu
+    if text:  # Kiểm tra nếu người dùng đã nhập dữ liệu
+        def_common(text)
+    else:
+        st.write("Please input a value.")
+
 
 # Hiển thị markdown trước
 st.markdown(

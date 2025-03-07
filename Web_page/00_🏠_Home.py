@@ -98,25 +98,6 @@ def predict(password):
         plot_type="bar"
     )
     st_shap(summary_plot)
-    # Giải thích bằng dependence plot
-    #st.write("### Dependence Plot (Impact of Lowercase Frequency)")
-    #dependence_plot = shap.dependence_plot(
-    #    100, 
-    #    shap_values[:,:,result[0]], 
-    #    new_matrix2, 
-    #    feature_names= feature_names
-    #)
-    #st.pyplot(dependence_plot)
-    # Giải thích bằng dependence plot
-    #st.write("### Dependence Plot (Impact of Lowercase Frequency)")
-    #dependence_plot = shap.dependence_plot(
-    #    99, 
-    #    shap_values[:,:,result[0]], 
-    #    new_matrix2, 
-    #    feature_names= feature_names
-    #)
-    #st.pyplot(dependence_plot)
-    #return predicted_strength
 
 # Nhập dữ liệu từ người dùng
 text = st.text_input("Enter a password:")

@@ -49,6 +49,14 @@ with open(r'C:\Users\asus\OneDrive - Trường ĐH CNTT - University of Informat
 with open(r'C:\Users\asus\OneDrive - Trường ĐH CNTT - University of Information Technology\VISUAL STUDIO CODE\PYTHON\IE105\Streamlit IE105\Web_page\Variable\y_pred.pkl', 'rb') as file:
     y_pred = pickle.load(file)
 
+st.write("### Model Evaluation Metrics")
+
+st.markdown("""
+            - **Accuracy Score**: The proportion of correctly predicted instances out of the total instances.
+            - **Confusion Matrix**: A table that summarizes the number of correct and incorrect predictions for each class.
+            - **Classification Report**: A detailed report showing precision, recall, F1-score, and accuracy for each class.
+            """)
+
 accuracy = accuracy_score(y_test, y_pred)
 conf_matrix = confusion_matrix(y_test, y_pred)
 class_report = classification_report(y_test, y_pred, output_dict=True)  
@@ -56,8 +64,10 @@ class_report = classification_report(y_test, y_pred, output_dict=True)
 # Chuyển đổi classification report thành DataFrame
 class_report_df = pd.DataFrame(class_report).transpose()
 
+st.write("### Accuracy Score")
+
 # Hiển thị accuracy
-st.write(f"Accuracy Score: {accuracy:.4f}")
+st.write(f"Here we use a total of 5 different model: LogisticRegression, DecisionTree, RandomForest, SupportVectorMachine, NeuralNetworking. The model with the highest accuracy score is Random Forest with {accuracy*100:.2f}%")
 
 # Hiển thị classification report dưới dạng bảng
 st.write("### Classification Report")
