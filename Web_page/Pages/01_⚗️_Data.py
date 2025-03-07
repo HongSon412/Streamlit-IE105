@@ -28,7 +28,7 @@ st.set_page_config(
 st.write("# Data ⚗️")
 
 
-conn = sqlite3.connect(r'C:\Users\asus\OneDrive - Trường ĐH CNTT - University of Information Technology\VISUAL STUDIO CODE\PYTHON\IE105\Streamlit IE105\password_data.sqlite')
+conn = sqlite3.connect(r'C:\Users\asus\OneDrive - Trường ĐH CNTT - University of Information Technology\VISUAL STUDIO CODE\PYTHON\IE105\Streamlit IE105\Datasets\password_data.sqlite')
 data = pd.read_sql_query("SELECT * FROM Users" ,conn)
 
 # Giao diện Streamlit
