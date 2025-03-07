@@ -29,8 +29,8 @@ st.image(password, width=100)
 st.write("# Predict Password Strength 🔒")
 
 # Tải mô hình đã lưu
-with open(r'C:\Users\asus\OneDrive - Trường ĐH CNTT - University of Information Technology\VISUAL STUDIO CODE\PYTHON\IE105\Streamlit IE105\Web_page\Models\clf.pkl', 'rb') as file:
-    clf = pickle.load(file)
+with open(r'C:\Users\asus\OneDrive - Trường ĐH CNTT - University of Information Technology\VISUAL STUDIO CODE\PYTHON\IE105\Streamlit IE105\Web_page\Models\rf.pkl', 'rb') as file:
+    rf = pickle.load(file)
 
 # Tải mô hình đã lưu
 with open(r'C:\Users\asus\OneDrive - Trường ĐH CNTT - University of Information Technology\VISUAL STUDIO CODE\PYTHON\IE105\Streamlit IE105\Web_page\Models\vectorizer.pkl', 'rb') as file:
@@ -66,7 +66,7 @@ def predict(password):
     new_matrix2 = np.append(sample_matrix.toarray(), (length_pass, length_normalised_lowercase)).reshape(1, 101)
     
     # Dự đoán kết quả
-    result = clf.predict(new_matrix2)
+    result = rf.predict(new_matrix2)
     predicted_strength = ["weak", "normal", "strong"][result[0]]
     
     # Tính toán giá trị SHAP để giải thích
