@@ -144,7 +144,7 @@ st.markdown(
     - This dataset having 100k passwords for natural language processing or Text analytics.
     - This is a dataset for binary sentiment classification containing substantially more data than previous benchmark datasets. 
     - We provide a set of 80,000 datasets for training and 20,000 for testing. 
-    - So, predict the number of weak, normal and strong using LogisticRegression(multi_class="multinomial").
-
+    - So, predict by using LogisticRegression, DecisionTree, RandomForest, SupportVectorMachine, NeuralNetworking.
+    - The best model is RandomForest with 0.92 accuracy.
 """
 )
