@@ -48,7 +48,7 @@ SHAPを活用した予測の透明性により、ユーザーはなぜそのパ�
 
 - **データベース**: SQLite
 - **プログラミング言語**: Python
-- **機械学習モデル**: Logistic Regression
+- **機械学習モデル**: Logistic Regression, Decision Tree, Random Forest, SVM, Neural Network
 - **説明可能性**: SHAPライブラリ
 
 ---
